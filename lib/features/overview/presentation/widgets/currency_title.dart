@@ -24,6 +24,8 @@ class CurrencyTitle extends StatelessWidget {
                 children: [
                   CurrencySelector(),
                 ],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
               ),
             );
           },

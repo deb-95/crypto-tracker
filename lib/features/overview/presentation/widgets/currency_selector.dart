@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CurrencySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<CurrencyBloc>(context);
+    final currencyBloc = BlocProvider.of<CurrencyBloc>(context);
     return Container(
       height: MediaQuery.of(context).size.height * 0.50,
       width: MediaQuery.of(context).size.width * 0.75,
@@ -15,11 +15,12 @@ class CurrencySelector extends StatelessWidget {
         itemCount: kCurrencies.length,
         itemBuilder: (context, index) => ListTile(
           title: Text(tr(kCurrencies[index])),
-          tileColor: bloc.state.selectedCurrency == kCurrencies[index]
+          tileColor: currencyBloc.state.selectedCurrency == kCurrencies[index]
               ? Colors.amberAccent
               : Colors.white,
           onTap: () {
-            bloc.add(CurrencyChangeEvent(newCurrency: kCurrencies[index]));
+            currencyBloc
+                .add(CurrencyChangeEvent(newCurrency: kCurrencies[index]));
             Navigator.of(context).pop();
           },
         ),
