@@ -1,3 +1,15 @@
 {
-    "hello_world": "Hello World"
+  "hello_world": "Hello World",
+  "BTC": "Bitcoin",
+  "ETH": "Ethereum",
+  "LTC": "Litecoin",
+  "BNB": "Binance coin",
+  "BCH": "Bitcoin cash",
+  "USD": "US Dollars",
+  "EUR": "Euro",
+  "GBP": "British Pound Sterling",
+  "JPY": "Japanese Yen",
+  "AUD": "Australian Dollars",
+  "CHF": "Swiss Franc",
+  "CNY": "Chinese Yuan"
 }
