@@ -16,6 +16,9 @@ class CryptoTracker extends StatelessWidget {
           locale: context.locale,
           title: 'Crypto Tracker',
           onGenerateRoute: AppRouter.onGenerateRoute,
+          themeMode: ThemeMode.system,
+          theme: ThemeData.light().copyWith(),
+          darkTheme: ThemeData.dark().copyWith(),
         ),
       ),
     );

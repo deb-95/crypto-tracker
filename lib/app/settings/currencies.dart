@@ -15,3 +15,13 @@ const kCurrencies = [
   'CHF',
   'CNY',
 ];
+
+const kCurrenciesSymbols = {
+  'USD': '\$',
+  'EUR': '€',
+  'GBP': '£',
+  'JPY': '¥',
+  'AUD': '\$',
+  'CHF': 'Fr.',
+  'CNY': '¥',
+};
