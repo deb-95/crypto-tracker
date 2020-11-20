@@ -11,5 +11,6 @@
   "JPY": "Yen",
   "AUD": "Dollaro Australiano",
   "CHF": "Franco Svizzero",
-  "CNY": "Yuan"
+  "CNY": "Yuan",
+  "pick_currency": "Seleziona una valuta"
 }

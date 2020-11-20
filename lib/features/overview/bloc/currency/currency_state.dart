@@ -1,7 +1,7 @@
 part of 'currency_bloc.dart';
 
 class CurrencyState extends Equatable {
-  String selectedCurrency;
+  final String selectedCurrency;
   CurrencyState({@required this.selectedCurrency});
 
   @override

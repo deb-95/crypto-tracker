@@ -11,5 +11,6 @@
   "JPY": "Japanese Yen",
   "AUD": "Australian Dollars",
   "CHF": "Swiss Franc",
-  "CNY": "Chinese Yuan"
+  "CNY": "Chinese Yuan",
+  "pick_currency": "Please select a currency"
 }

@@ -1,18 +1,14 @@
-import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
+import 'package:cryptotracker/features/overview/presentation/widgets/currency_title.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: BlocBuilder<CurrencyBloc, CurrencyState>(
-          builder: (context, state) {
-            return Text(state.selectedCurrency);
-          },
-        ),
+        title: CurrencyTitle(),
       ),
       body: Center(
         child: Container(
