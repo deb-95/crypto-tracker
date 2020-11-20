@@ -25,3 +25,12 @@ const kCurrenciesSymbols = {
   'CHF': 'Fr.',
   'CNY': '¥',
 };
+
+const kDefaultCurrency = {
+  'CH': 'CHF',
+  'IT': 'EUR',
+  'US': 'USD',
+  'UK': 'GBP',
+  'it': 'EUR',
+  'en': 'USD'
+};

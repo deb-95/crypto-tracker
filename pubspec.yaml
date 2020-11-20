@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.0
   easy_localization: ^2.3.3
+  flutter_bloc: ^6.1.1
   pedantic: ^1.9.2
 
 dev_dependencies:
@@ -19,4 +20,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/translations/  
+    - assets/translations/
