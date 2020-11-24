@@ -1,8 +1,18 @@
+import 'package:cryptotracker/app/settings/currencies.dart';
+import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
+import 'package:cryptotracker/features/overview/models/crypto_card_data.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CryptoCard extends StatelessWidget {
+  final CryptoCardData cardData;
+
+  const CryptoCard({Key key, this.cardData}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final percentageSign = cardData.priceChangePercentage24H > 0 ? '+' : '-';
     return Card(
       elevation: 6,
       shape: RoundedRectangleBorder(
@@ -17,6 +27,7 @@ class CryptoCard extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     maxRadius: 30,
+                    backgroundImage: NetworkImage(cardData.imageUrl),
                   )
                 ],
               ),
@@ -28,15 +39,20 @@ class CryptoCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lorem ipsum'),
-                    Text('Lorem ipsum'),
+                    Text(cardData.name),
+                    BlocBuilder<CurrencyBloc, CurrencyState>(
+                      builder: (context, state) {
+                        return Text(
+                            '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}');
+                      },
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: [
-                            Text('Lorem ipsum'),
-                            Text('Lorem ipsum'),
+                            Text(tr('highest24')),
+                            Text('${cardData.high24H}'),
                           ],
                         ),
                         SizedBox(
@@ -44,13 +60,13 @@ class CryptoCard extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            Text('Lorem ipsum'),
-                            Text('Lorem ipsum'),
+                            Text(tr('lowest24')),
+                            Text('${cardData.low24H}'),
                           ],
                         )
                       ],
                     ),
-                    Text('Lorem ipsum'),
+                    Text(cardData.lastUpdated.toString()),
                   ],
                 ),
               ),
@@ -59,16 +75,23 @@ class CryptoCard extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    width: 60,
+                    width: 90,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.greenAccent,
+                      color: cardData.priceChangePercentage24H > 0
+                          ? Colors.greenAccent
+                          : Colors.redAccent,
                       borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: Colors.green),
+                      border: Border.all(
+                        color: cardData.priceChangePercentage24H > 0
+                            ? Colors.green
+                            : Colors.red,
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Text('0.4%'),
+                      child: Text(
+                          '${percentageSign}${cardData.priceChangePercentage24H.toStringAsPrecision(3)}%'),
                     ),
                   )
                 ],

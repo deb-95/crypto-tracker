@@ -12,5 +12,7 @@
   "AUD": "Australian Dollars",
   "CHF": "Swiss Franc",
   "CNY": "Chinese Yuan",
-  "pick_currency": "Please select a currency"
+  "pick_currency": "Please select a currency",
+  "highest24": "24H Highest",
+  "lowest24": "24H Lowest"
 }

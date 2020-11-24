@@ -12,5 +12,7 @@
   "AUD": "Dollaro Australiano",
   "CHF": "Franco Svizzero",
   "CNY": "Yuan",
-  "pick_currency": "Seleziona una valuta"
+  "pick_currency": "Seleziona una valuta",
+  "highest24": "Più alto 24H",
+  "lowest24": "Più basso 24H"
 }

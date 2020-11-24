@@ -12,7 +12,13 @@ class OverviewInitial extends OverviewState {}
 class OverviewLoading extends OverviewState {}
 
 class OverviewLoaded extends OverviewState {
-  // TODO: add property for fetched api model
+  final List<CryptoCardData> data;
+
+  OverviewLoaded(this.data);
 }
 
-class OverviewError extends OverviewState {}
+class OverviewError extends OverviewState {
+  final String error;
+
+  OverviewError(this.error);
+}
