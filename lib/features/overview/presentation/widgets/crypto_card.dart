@@ -12,7 +12,7 @@ class CryptoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final percentageSign = cardData.priceChangePercentage24H > 0 ? '+' : '-';
+    final percentageSign = cardData.priceChangePercentage24H > 0 ? '+' : '';
     return Card(
       elevation: 6,
       shape: RoundedRectangleBorder(
@@ -20,83 +20,100 @@ class CryptoCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    maxRadius: 30,
-                    backgroundImage: NetworkImage(cardData.imageUrl),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(cardData.name),
-                    BlocBuilder<CurrencyBloc, CurrencyState>(
-                      builder: (context, state) {
-                        return Text(
-                            '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}');
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        maxRadius: 20,
+                        backgroundImage: NetworkImage(cardData.imageUrl),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 6,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          children: [
-                            Text(tr('highest24')),
-                            Text('${cardData.high24H}'),
-                          ],
+                        Text(cardData.name),
+                        BlocBuilder<CurrencyBloc, CurrencyState>(
+                          builder: (context, state) {
+                            return Text(
+                                '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}');
+                          },
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(tr('lowest24')),
-                            Text('${cardData.low24H}'),
+                            Column(
+                              children: [
+                                Text(
+                                  tr('highest24'),
+                                  style: TextStyle(color: Colors.green[900]),
+                                ),
+                                Text(
+                                  '${cardData.high24H}',
+                                  style: TextStyle(color: Colors.green[700]),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  tr('lowest24'),
+                                  style: TextStyle(color: Colors.red[900]),
+                                ),
+                                Text(
+                                  '${cardData.low24H}',
+                                  style: TextStyle(color: Colors.red[700]),
+                                ),
+                              ],
+                            )
                           ],
                         )
                       ],
                     ),
-                    Text(cardData.lastUpdated.toString()),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 90,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: cardData.priceChangePercentage24H > 0
+                              ? Colors.greenAccent
+                              : Colors.redAccent,
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: cardData.priceChangePercentage24H > 0
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                              '${percentageSign}${cardData.priceChangePercentage24H.toStringAsPrecision(3)}%'),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  Container(
-                    width: 90,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: cardData.priceChangePercentage24H > 0
-                          ? Colors.greenAccent
-                          : Colors.redAccent,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: cardData.priceChangePercentage24H > 0
-                            ? Colors.green
-                            : Colors.red,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                          '${percentageSign}${cardData.priceChangePercentage24H.toStringAsPrecision(3)}%'),
-                    ),
-                  )
-                ],
-              ),
-            )
+            Text('Last updated: ${cardData.lastUpdated.toString()}'),
           ],
         ),
       ),

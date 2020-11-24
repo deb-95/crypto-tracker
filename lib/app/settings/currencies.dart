@@ -4,6 +4,8 @@ const kCryptoCurrencies = [
   'litecoin',
   'binancecoin',
   'bitcoin-cash',
+  'tether',
+  'okb'
 ];
 
 const kCurrencies = [
