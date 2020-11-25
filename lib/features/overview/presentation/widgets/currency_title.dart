@@ -1,5 +1,4 @@
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
-import 'package:cryptotracker/features/overview/bloc/overview/overview_bloc.dart';
 import 'package:cryptotracker/features/overview/presentation/widgets/currency_selector.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -42,13 +41,6 @@ class CurrencyTitle extends StatelessWidget {
                 );
               },
             ),
-            GestureDetector(
-              onTap: () {
-                BlocProvider.of<OverviewBloc>(context)
-                    .add(OverviewGetData(currency: state.selectedCurrency));
-              },
-              child: Icon(Icons.refresh),
-            )
           ],
         );
       },

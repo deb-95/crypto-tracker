@@ -15,6 +15,10 @@ class _OverviewScreenState extends State<OverviewScreen> {
   @override
   void initState() {
     super.initState();
+    _getData();
+  }
+
+  Future<void> _getData() async {
     final curr = BlocProvider.of<CurrencyBloc>(context).state.selectedCurrency;
     BlocProvider.of<OverviewBloc>(context).add(OverviewGetData(currency: curr));
   }
@@ -31,7 +35,11 @@ class _OverviewScreenState extends State<OverviewScreen> {
             child: BlocBuilder<OverviewBloc, OverviewState>(
               builder: (context, state) {
                 if (state is OverviewLoaded) {
-                  return CryptoCards(cardsData: state.data);
+                  return RefreshIndicator(
+                      onRefresh: () async {
+                        await _getData();
+                      },
+                      child: CryptoCards(cardsData: state.data));
                 } else if (state is OverviewLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is OverviewError) {
