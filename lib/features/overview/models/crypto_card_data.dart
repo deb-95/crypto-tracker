@@ -10,10 +10,11 @@ class CryptoCardData {
   CryptoCardData.fromJson(Map<String, dynamic> json) {
     imageUrl = json['image'];
     name = json['name'];
-    currentPrice = json['current_price'];
-    high24H = json['high_24h'];
-    low24H = json['low_24h'];
-    priceChangePercentage24H = json['price_change_percentage_24h'];
+    currentPrice = double.parse('${json['current_price']}');
+    high24H = double.parse('${json['high_24h']}');
+    low24H = double.parse('${json['low_24h']}');
+    priceChangePercentage24H =
+        double.parse('${json['price_change_percentage_24h']}');
     lastUpdated = DateTime.parse(json['last_updated']);
   }
 }

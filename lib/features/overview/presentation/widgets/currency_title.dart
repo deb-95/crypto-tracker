@@ -1,4 +1,5 @@
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
+import 'package:cryptotracker/features/overview/bloc/overview/overview_bloc.dart';
 import 'package:cryptotracker/features/overview/presentation/widgets/currency_selector.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,25 +14,42 @@ class CurrencyTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CurrencyBloc, CurrencyState>(
       builder: (context, state) {
-        return MaterialButton(
-          child: Text(tr(state.selectedCurrency)),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (_) => SimpleDialog(
-                title: Text(tr('pick_currency')),
-                elevation: 5,
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+              child: Row(
                 children: [
-                  CurrencySelector(),
+                  Text(tr(state.selectedCurrency)),
+                  Icon(Icons.swap_vert_outlined),
                 ],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20.0),
-                  ),
-                ),
               ),
-            );
-          },
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => SimpleDialog(
+                    title: Text(tr('pick_currency')),
+                    elevation: 5,
+                    children: [
+                      CurrencySelector(),
+                    ],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            GestureDetector(
+              onTap: () {
+                BlocProvider.of<OverviewBloc>(context)
+                    .add(OverviewGetData(currency: state.selectedCurrency));
+              },
+              child: Icon(Icons.refresh),
+            )
+          ],
         );
       },
     );
