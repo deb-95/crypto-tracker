@@ -81,36 +81,3 @@ class OverviewResponseDTO {
       _$OverviewResponseDTOFromJson(json);
   Map<String, dynamic> toJson() => _$OverviewResponseDTOToJson(this);
 }
-
-/* 
-OverviewResponseDTO.fromJson(Map<String, dynamic> json) {
-    imageUrl = json['image'];
-    name = json['name'];
-    currentPrice = double.parse('${json['current_price']}');
-    high24H = double.parse('${json['high_24h']}');
-    low24H = double.parse('${json['low_24h']}');
-    priceChangePercentage24H =
-        double.parse('${json['price_change_percentage_24h']}');
-    lastUpdated = DateTime.parse(json['last_updated']);
-    id = json['id'];
-    symbol = json['symbol'];
-    priceChange24H = double.parse('${json['price_change_24h']}');
-    marketCap = int.parse('${json['market_cap']}');
-    marketCapRank = int.parse('${json['market_cap_rank']}');
-    marketCapChange24h = double.parse('${json['market_cap_change_24h']}');
-    marketCapChangePercentage24h =
-        double.parse('${json['market_cap_change_percentage_24h']}');
-    fullyDilutedValuation =
-        double.parse('${json['fully_diluted_valuation'] ?? 0}');
-    totalVolume = int.parse('${json['total_volume']}');
-    circulatingSupply = double.parse('${json['circulating_supply']}');
-    totalSupply = double.parse('${json['total_supply'] ?? 0}');
-    maxSupply = double.parse('${json['double_supply'] ?? 0}');
-    ath = double.parse('${json['ath']}');
-    atl = double.parse('${json['atl']}');
-    athChangePercentage = double.parse('${json['ath_change_percentage']}');
-    atlChangePercentage = double.parse('${json['atl_change_percentage']}');
-    athDate = DateTime.parse(json['ath_date']);
-    atlDate = DateTime.parse(json['atl_date']);
-  }
-*/
