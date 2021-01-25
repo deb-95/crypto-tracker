@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cryptotracker/features/overview/models/crypto_card_data.dart';
+import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
 import 'package:cryptotracker/features/overview/service/overview_service.dart';
 import 'package:equatable/equatable.dart';
 
@@ -21,7 +21,8 @@ class OverviewBloc extends Bloc<OverviewEvent, OverviewState> {
       yield OverviewLoading();
       try {
         final results = await service.getOverviewList(event.currency);
-        yield OverviewLoaded(results);
+        final models = [for (final dto in results) CryptoCardVM.fromDTO(dto)];
+        yield OverviewLoaded(models);
       } on Exception catch (e) {
         yield OverviewError(e.toString());
       }

@@ -1,6 +1,3 @@
-import 'dart:collection';
-import 'dart:convert';
-
 import 'package:cryptotracker/app/settings/currencies.dart';
 import 'package:dio/dio.dart';
 

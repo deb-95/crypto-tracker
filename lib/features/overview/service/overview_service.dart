@@ -1,11 +1,11 @@
 import 'package:cryptotracker/features/overview/api/base_api.dart';
-import 'package:cryptotracker/features/overview/models/crypto_card_data.dart';
+import 'package:cryptotracker/features/overview/dtos/overview_response_dto.dart';
 
 class OverviewService {
   final _api = BaseApi();
 
-  Future<List<CryptoCardData>> getOverviewList(String currency) async {
+  Future<List<OverviewResponseDTO>> getOverviewList(String currency) async {
     final response = await _api.getOverviewList(currency);
-    return response.map((el) => CryptoCardData.fromJson(el)).toList();
+    return [for (Map<String, dynamic> el in response) OverviewResponseDTO.fromJson(el)];
   }
 }

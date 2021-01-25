@@ -1,12 +1,12 @@
 import 'package:cryptotracker/app/settings/currencies.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
-import 'package:cryptotracker/features/overview/models/crypto_card_data.dart';
+import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CryptoCard extends StatelessWidget {
-  final CryptoCardData cardData;
+  final CryptoCardVM cardData;
 
   const CryptoCard({Key key, this.cardData}) : super(key: key);
 
@@ -85,7 +85,7 @@ class CryptoCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Column(
                     children: [
                       Container(

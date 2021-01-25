@@ -1,9 +1,9 @@
-import 'package:cryptotracker/features/overview/models/crypto_card_data.dart';
+import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
 import 'package:cryptotracker/features/overview/presentation/widgets/crypto_card.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCards extends StatelessWidget {
-  final List<CryptoCardData> cardsData;
+  final List<CryptoCardVM> cardsData;
 
   const CryptoCards({Key key, this.cardsData}) : super(key: key);
 

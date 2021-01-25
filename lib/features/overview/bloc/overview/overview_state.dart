@@ -12,7 +12,7 @@ class OverviewInitial extends OverviewState {}
 class OverviewLoading extends OverviewState {}
 
 class OverviewLoaded extends OverviewState {
-  final List<CryptoCardData> data;
+  final List<CryptoCardVM> data;
 
   OverviewLoaded(this.data);
 }
