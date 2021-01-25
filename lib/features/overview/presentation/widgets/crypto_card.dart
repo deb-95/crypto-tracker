@@ -1,3 +1,4 @@
+import 'package:cryptotracker/app/routes/app_router.dart';
 import 'package:cryptotracker/app/settings/colors.dart';
 import 'package:cryptotracker/app/settings/currencies.dart';
 import 'package:cryptotracker/features/detail/presentation/screens/detail_screen.dart';
@@ -16,8 +17,8 @@ class CryptoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DetailScreen(currency: cardData.name)));
+        Navigator.of(context)
+            .pushNamed(AppRouter.DETAIL, arguments: cardData.name);
       },
       child: Card(
         elevation: 6,
