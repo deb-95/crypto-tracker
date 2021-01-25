@@ -1,3 +1,4 @@
+import 'package:cryptotracker/app/settings/colors.dart';
 import 'package:cryptotracker/app/settings/currencies.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
 import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
@@ -12,7 +13,6 @@ class CryptoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final percentageSign = cardData.priceChangePercentage24H > 0 ? '+' : '';
     return Card(
       elevation: 6,
       shape: RoundedRectangleBorder(
@@ -55,11 +55,11 @@ class CryptoCard extends StatelessWidget {
                               children: [
                                 Text(
                                   tr('highest24'),
-                                  style: TextStyle(color: Colors.green[900]),
+                                  style: TextStyle(color: kGreen),
                                 ),
                                 Text(
                                   '${cardData.high24H}',
-                                  style: TextStyle(color: Colors.green[700]),
+                                  style: TextStyle(color: kGreen),
                                 ),
                               ],
                             ),
@@ -70,11 +70,11 @@ class CryptoCard extends StatelessWidget {
                               children: [
                                 Text(
                                   tr('lowest24'),
-                                  style: TextStyle(color: Colors.red[900]),
+                                  style: TextStyle(color: kRed),
                                 ),
                                 Text(
                                   '${cardData.low24H}',
-                                  style: TextStyle(color: Colors.red[700]),
+                                  style: TextStyle(color: kRed),
                                 ),
                               ],
                             )
@@ -88,26 +88,8 @@ class CryptoCard extends StatelessWidget {
                   flex: 3,
                   child: Column(
                     children: [
-                      Container(
-                        width: 90,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: cardData.priceChangePercentage24H > 0
-                              ? Colors.greenAccent
-                              : Colors.redAccent,
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(
-                            color: cardData.priceChangePercentage24H > 0
-                                ? Colors.green
-                                : Colors.red,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text(
-                              '${percentageSign}${cardData.priceChangePercentage24H.toStringAsPrecision(3)}%'),
-                        ),
-                      )
+                      PercentageChangeBox(
+                        percentage: cardData.priceChangePercentage24H)
                     ],
                   ),
                 )
@@ -116,6 +98,35 @@ class CryptoCard extends StatelessWidget {
             Text('Last updated: ${cardData.lastUpdated.toString()}'),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PercentageChangeBox extends StatelessWidget {
+  const PercentageChangeBox({
+    Key key,
+    @required this.percentage,
+  }) : super(key: key);
+
+  final double percentage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 90,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: percentage > 0 ? Colors.greenAccent : Colors.redAccent,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: percentage > 0 ? Colors.green : Colors.red,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text(
+            '${percentage > 0 ? '+' : ''}${percentage.toStringAsPrecision(3)}%'),
       ),
     );
   }
