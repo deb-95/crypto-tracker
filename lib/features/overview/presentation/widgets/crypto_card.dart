@@ -1,5 +1,6 @@
 import 'package:cryptotracker/app/settings/colors.dart';
 import 'package:cryptotracker/app/settings/currencies.dart';
+import 'package:cryptotracker/features/detail/presentation/screens/detail_screen.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
 import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,90 +14,96 @@ class CryptoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 6,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        maxRadius: 20,
-                        backgroundImage: NetworkImage(cardData.imageUrl),
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 6,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailScreen(currency: cardData.name)));
+      },
+      child: Card(
+        elevation: 6,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(cardData.name),
-                        BlocBuilder<CurrencyBloc, CurrencyState>(
-                          builder: (context, state) {
-                            return Text(
-                                '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}');
-                          },
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  tr('highest24'),
-                                  style: TextStyle(color: kGreen),
-                                ),
-                                Text(
-                                  '${cardData.high24H}',
-                                  style: TextStyle(color: kGreen),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  tr('lowest24'),
-                                  style: TextStyle(color: kRed),
-                                ),
-                                Text(
-                                  '${cardData.low24H}',
-                                  style: TextStyle(color: kRed),
-                                ),
-                              ],
-                            )
-                          ],
+                        CircleAvatar(
+                          maxRadius: 20,
+                          backgroundImage: NetworkImage(cardData.imageUrl),
                         )
                       ],
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      PercentageChangeBox(
-                        percentage: cardData.priceChangePercentage24H)
-                    ],
+                  Expanded(
+                    flex: 6,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(cardData.name),
+                          BlocBuilder<CurrencyBloc, CurrencyState>(
+                            builder: (context, state) {
+                              return Text(
+                                  '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}');
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    tr('highest24'),
+                                    style: TextStyle(color: kGreen),
+                                  ),
+                                  Text(
+                                    '${cardData.high24H}',
+                                    style: TextStyle(color: kGreen),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    tr('lowest24'),
+                                    style: TextStyle(color: kRed),
+                                  ),
+                                  Text(
+                                    '${cardData.low24H}',
+                                    style: TextStyle(color: kRed),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                )
-              ],
-            ),
-            Text('Last updated: ${cardData.lastUpdated.toString()}'),
-          ],
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      children: [
+                        PercentageChangeBox(
+                            percentage: cardData.priceChangePercentage24H)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              Text('Last updated: ${cardData.lastUpdated.toString()}'),
+            ],
+          ),
         ),
       ),
     );

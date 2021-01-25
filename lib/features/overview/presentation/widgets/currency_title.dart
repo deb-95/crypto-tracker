@@ -16,14 +16,14 @@ class CurrencyTitle extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MaterialButton(
+            GestureDetector(
               child: Row(
                 children: [
                   Text(tr(state.selectedCurrency)),
                   Icon(Icons.swap_vert_outlined),
                 ],
               ),
-              onPressed: () {
+              onTap: () {
                 showDialog(
                   context: context,
                   builder: (_) => SimpleDialog(
