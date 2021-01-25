@@ -17,9 +17,7 @@ class CurrencySelector extends StatelessWidget {
         itemCount: kCurrencies.length,
         itemBuilder: (context, index) => ListTile(
           title: Text(tr(kCurrencies[index])),
-          tileColor: currencyBloc.state.selectedCurrency == kCurrencies[index]
-              ? Colors.amberAccent
-              : Colors.white,
+          selected: currencyBloc.state.selectedCurrency == kCurrencies[index],
           onTap: () {
             currencyBloc
                 .add(CurrencyChangeEvent(newCurrency: kCurrencies[index]));
