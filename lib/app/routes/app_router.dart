@@ -15,7 +15,7 @@ class AppRouter {
       case DETAIL:
         return MaterialPageRoute(
           builder: (context) => DetailScreen(
-            currency: settings.arguments as String,
+            coin: settings.arguments as String,
           ),
         );
       default:

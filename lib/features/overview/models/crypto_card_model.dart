@@ -1,6 +1,7 @@
 import 'package:cryptotracker/features/overview/dtos/overview_response_dto.dart';
 
 class CryptoCardVM {
+  final String id;
   final String imageUrl;
   final String name;
   final double currentPrice;
@@ -10,7 +11,8 @@ class CryptoCardVM {
   final DateTime lastUpdated;
 
   CryptoCardVM(
-      {this.imageUrl,
+      {this.id,
+      this.imageUrl,
       this.name,
       this.currentPrice,
       this.high24H,
@@ -20,6 +22,7 @@ class CryptoCardVM {
 
   factory CryptoCardVM.fromDTO(OverviewResponseDTO dto) {
     return CryptoCardVM(
+        id: dto.id,
         imageUrl: dto.imageUrl,
         name: dto.name,
         currentPrice: dto.currentPrice,

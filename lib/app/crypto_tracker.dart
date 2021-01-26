@@ -1,4 +1,5 @@
 import 'package:cryptotracker/app/routes/app_router.dart';
+import 'package:cryptotracker/features/detail/bloc/detail/detail_bloc.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
 import 'package:cryptotracker/features/overview/bloc/overview/overview_bloc.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class CryptoTracker extends StatelessWidget {
               ),
             ),
             BlocProvider(create: (_) => OverviewBloc()),
+            BlocProvider(create: (_) => DetailBloc()),
           ],
           child: MaterialApp(
             localizationsDelegates: context.localizationDelegates,

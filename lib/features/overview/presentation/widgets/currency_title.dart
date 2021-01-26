@@ -13,35 +13,31 @@ class CurrencyTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CurrencyBloc, CurrencyState>(
       builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              child: Row(
+        return GestureDetector(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(tr(state.selectedCurrency)),
+              Icon(Icons.swap_vert_outlined),
+            ],
+          ),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => SimpleDialog(
+                title: Text(tr('pick_currency')),
+                elevation: 5,
                 children: [
-                  Text(tr(state.selectedCurrency)),
-                  Icon(Icons.swap_vert_outlined),
+                  CurrencySelector(),
                 ],
-              ),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) => SimpleDialog(
-                    title: Text(tr('pick_currency')),
-                    elevation: 5,
-                    children: [
-                      CurrencySelector(),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
                   ),
-                );
-              },
-            ),
-          ],
+                ),
+              ),
+            );
+          },
         );
       },
     );

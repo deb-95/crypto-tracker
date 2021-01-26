@@ -18,7 +18,7 @@ class CryptoCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
-            .pushNamed(AppRouter.DETAIL, arguments: cardData.name);
+            .pushNamed(AppRouter.DETAIL, arguments: cardData.id);
       },
       child: Card(
         elevation: 6,
