@@ -1,4 +1,5 @@
 import 'package:cryptotracker/features/detail/bloc/detail/detail_bloc.dart';
+import 'package:cryptotracker/features/detail/presentation/widgets/line_chart.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,15 +39,12 @@ class _DetailScreenState extends State<DetailScreen> {
               builder: (context, state) {
                 if (state is DetailLoaded) {
                   return RefreshIndicator(
-                    onRefresh: () async {
-                      await _getData();
-                    },
-                    child: ListView.builder(
-                      itemBuilder: (_, index) => Text(
-                          '${state.data.prices[index].date} ${state.data.prices[index].priceToDate}'),
-                      itemCount: state.data.prices.length,
-                    ),
-                  );
+                      onRefresh: () async {
+                        await _getData();
+                      },
+                      child: Center(
+                          child:
+                              LineChartWidget(graphData: state.data.prices)));
                 } else if (state is DetailLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is DetailError) {

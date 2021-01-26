@@ -17,6 +17,7 @@ dependencies:
   flutter_bloc: ^6.1.1
   pedantic: ^1.9.2
   json_annotation: ^3.0.0
+  fl_chart: ^0.12.2
 
 dev_dependencies:
   flutter_test:
