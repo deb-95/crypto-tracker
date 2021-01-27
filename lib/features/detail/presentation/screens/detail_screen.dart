@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailScreen extends StatefulWidget {
   final String coin;
+  final String name;
 
-  const DetailScreen({Key key, this.coin}) : super(key: key);
+  const DetailScreen({Key key, this.coin, this.name}) : super(key: key);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -30,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.coin}'),
+        title: Text('${widget.name}'),
       ),
       body: Column(
         children: [
@@ -39,12 +40,13 @@ class _DetailScreenState extends State<DetailScreen> {
               builder: (context, state) {
                 if (state is DetailLoaded) {
                   return RefreshIndicator(
-                      onRefresh: () async {
-                        await _getData();
-                      },
-                      child: Center(
-                          child:
-                              LineChartWidget(graphData: state.data.prices)));
+                    onRefresh: () async {
+                      await _getData();
+                    },
+                    child: Center(
+                      child: LineChartWidget(graphData: state.data.prices),
+                    ),
+                  );
                 } else if (state is DetailLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is DetailError) {

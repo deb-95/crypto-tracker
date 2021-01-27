@@ -9,23 +9,35 @@ class LineChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    graphData.sort((el, el2) => el.priceToDate.compareTo(el2.priceToDate));
+    var maxPrice = graphData.last.priceToDate;
+    var minPrice = graphData.first.priceToDate;
+
     return Container(
       child: LineChart(
         LineChartData(
-          gridData: FlGridData(show: true, verticalInterval: 100.0),
+          gridData: FlGridData(
+            show: true,
+            drawVerticalLine: true,
+            horizontalInterval: (maxPrice - minPrice) / 6,
+          ),
           titlesData: FlTitlesData(
-              show: true,
-              bottomTitles: SideTitles(
+            show: true,
+            bottomTitles: SideTitles(
+              showTitles: true,
+              getTitles: (value) {
+                return '${graphData[value.toInt()].date.day}/${graphData[value.toInt()].date.month}';
+              },
+              margin: 8,
+            ),
+            leftTitles: SideTitles(
                 showTitles: true,
-                getTitles: (value) {
-                  return '${graphData[value.toInt()].date.day}/${graphData[value.toInt()].date.month}';
-                },
-                margin: 8,
-              ),
-              leftTitles: SideTitles(
-                showTitles: true,
-                margin: 10,
-              )),
+                margin: 20,
+                interval: (maxPrice - minPrice) / 6,
+                checkToShowTitle: (min, max, sideTitles, interval, value) {
+                  return value == min || value == max;
+                }),
+          ),
           lineBarsData: [
             LineChartBarData(
               spots: [
