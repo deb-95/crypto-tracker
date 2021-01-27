@@ -1,7 +1,9 @@
 import 'package:cryptotracker/app/routes/app_router.dart';
 import 'package:cryptotracker/app/settings/colors.dart';
+import 'package:cryptotracker/app/settings/constants.dart';
 import 'package:cryptotracker/app/settings/currencies.dart';
 import 'package:cryptotracker/features/detail/presentation/screens/detail_screen.dart';
+import 'package:cryptotracker/features/detail/presentation/screens/detail_screen_arguments.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
 import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,8 +19,9 @@ class CryptoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .pushNamed(AppRouter.DETAIL, arguments: cardData.id);
+        Navigator.of(context).pushNamed(AppRouter.DETAIL,
+            arguments:
+                DetailScreenArguments(coin: cardData.id, name: cardData.name));
       },
       child: Card(
         elevation: 6,
@@ -48,11 +51,13 @@ class CryptoCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(cardData.name),
+                          Text(cardData.name, style: kMediumText),
                           BlocBuilder<CurrencyBloc, CurrencyState>(
                             builder: (context, state) {
                               return Text(
-                                  '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}');
+                                '${cardData.currentPrice} ${kCurrenciesSymbols[state.selectedCurrency]}',
+                                style: kMediumText,
+                              );
                             },
                           ),
                           Row(
@@ -62,11 +67,11 @@ class CryptoCard extends StatelessWidget {
                                 children: [
                                   Text(
                                     tr('highest24'),
-                                    style: TextStyle(color: kGreen),
+                                    style: kMediumText.copyWith(color: kGreen),
                                   ),
                                   Text(
                                     '${cardData.high24H}',
-                                    style: TextStyle(color: kGreen),
+                                    style: kMediumText.copyWith(color: kGreen),
                                   ),
                                 ],
                               ),
@@ -77,11 +82,11 @@ class CryptoCard extends StatelessWidget {
                                 children: [
                                   Text(
                                     tr('lowest24'),
-                                    style: TextStyle(color: kRed),
+                                    style: kMediumText.copyWith(color: kRed),
                                   ),
                                   Text(
                                     '${cardData.low24H}',
-                                    style: TextStyle(color: kRed),
+                                    style: kMediumText.copyWith(color: kRed),
                                   ),
                                 ],
                               )
@@ -125,7 +130,7 @@ class PercentageChangeBox extends StatelessWidget {
       width: 90,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: percentage > 0 ? Colors.greenAccent : Colors.redAccent,
+        color: percentage > 0 ? kBoxGreen : Colors.redAccent,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
           color: percentage > 0 ? Colors.green : Colors.red,
@@ -134,7 +139,8 @@ class PercentageChangeBox extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Text(
-            '${percentage > 0 ? '+' : ''}${percentage.toStringAsPrecision(3)}%'),
+          '${percentage > 0 ? '+' : ''}${percentage.toStringAsPrecision(3)}%',
+        ),
       ),
     );
   }
