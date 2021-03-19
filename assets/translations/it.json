@@ -14,5 +14,6 @@
   "CNY": "Yuan",
   "pick_currency": "Seleziona una valuta",
   "highest24": "Più alto 24H",
-  "lowest24": "Più basso 24H"
+  "lowest24": "Più basso 24H",
+  "last_updated": "Ultimo aggiornamento"
 }

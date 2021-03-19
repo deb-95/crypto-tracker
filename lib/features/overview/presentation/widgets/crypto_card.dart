@@ -2,7 +2,6 @@ import 'package:cryptotracker/app/routes/app_router.dart';
 import 'package:cryptotracker/app/settings/colors.dart';
 import 'package:cryptotracker/app/settings/constants.dart';
 import 'package:cryptotracker/app/settings/currencies.dart';
-import 'package:cryptotracker/features/detail/presentation/screens/detail_screen.dart';
 import 'package:cryptotracker/features/detail/presentation/screens/detail_screen_arguments.dart';
 import 'package:cryptotracker/features/overview/bloc/currency/currency_bloc.dart';
 import 'package:cryptotracker/features/overview/models/crypto_card_model.dart';
@@ -60,38 +59,7 @@ class CryptoCard extends StatelessWidget {
                               );
                             },
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    tr('highest24'),
-                                    style: kMediumText.copyWith(color: kGreen),
-                                  ),
-                                  Text(
-                                    '${cardData.high24H}',
-                                    style: kMediumText.copyWith(color: kGreen),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    tr('lowest24'),
-                                    style: kMediumText.copyWith(color: kRed),
-                                  ),
-                                  Text(
-                                    '${cardData.low24H}',
-                                    style: kMediumText.copyWith(color: kRed),
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
+                          CoinSummary(cardData: cardData)
                         ],
                       ),
                     ),
@@ -107,11 +75,56 @@ class CryptoCard extends StatelessWidget {
                   )
                 ],
               ),
-              Text('Last updated: ${cardData.lastUpdated.toString()}'),
+              Text('${tr('last_updated')}: ${cardData.lastUpdated.toString()}'),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class CoinSummary extends StatelessWidget {
+  const CoinSummary({
+    Key key,
+    @required this.cardData,
+  }) : super(key: key);
+
+  final CryptoCardVM cardData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            Text(
+              tr('highest24'),
+              style: kMediumText.copyWith(color: kGreen),
+            ),
+            Text(
+              '${cardData.high24H}',
+              style: kMediumText.copyWith(color: kGreen),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          children: [
+            Text(
+              tr('lowest24'),
+              style: kMediumText.copyWith(color: kRed),
+            ),
+            Text(
+              '${cardData.low24H}',
+              style: kMediumText.copyWith(color: kRed),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
